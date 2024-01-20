@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>Edit product</title>
+    <style>
+      body{
+        background-color: #8eb9de;
+      }
+        .box{
+          width: 190vh;
+          height: 75vh;
+          margin: 10vh;
+          padding: 20px 20px;
+          background-color: aliceblue;
+        }
+        .box div{
+          
+          margin: 20px;
+        }
+        .box label{
+          font-size: large;
+        }
+        .box input{
+          width: 250px;
+          height: 40px;
+
+        }
+        
+        .d{
+          width: 280px;
+        }
+        .box .c{
+          float: left;
+        }
+        button{
+          padding: 10px 50px;
+          margin: 50px;
+          border-radius: 10px;
+          border: none;
+          color: aliceblue;
+          background-color: blue;
+        }
+        .box input:hover,button:hover{
+          box-shadow: 0px 0px 2px 2px skyblue;
+        }
+        input{
+            font-size: medium;
+            font-weight: 600;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">GROCERY</a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li ><a href="{{url_for('admin_page')}}">Categroy</a></li>
+            <li ><a href="{{url_for('product_wise')}}">Product</a></li>
+            <li ><a href="{{url_for('summary_section')}}">Summary</a></li>
+          </ul>
+          
+          <ul class="nav navbar-nav navbar-right">
+            
+            <li><a href="{{url_for('user_login')}}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        </ul>
+        </div>
+        </nav>
+        <div class="box">
+          <form action="/edit_item_at_server/{{i}}/{{cid}}/{{c}}" method="post">
+          <div><h1><b>Edit product</b></h1></div>
+          <div class="c">
+          <div>
+            <label for="">Product Name</label><br>
+            <input type="text" name="name" value="{{name}}">
+          </div>
+          <div>
+            <label for="">Manufacture Date</label><br>
+            <input type="date" name="mfd" value="{{mfd}}">
+          </div>
+        </div>
+        <div class="c">
+          <div>
+            <label for="">Expiry Date</label><br>
+            <input type="date" name="ed" value="{{ed}}">
+          </div>
+          <div>
+            <label for="">Quantity</label><br>
+            <input type="text" name="available_stocks" value="{{av}}">
+          </div>
+          <div>
+            <label for="">Rate</label><br>
+            <input type="number" name="rate" value="{{r}}">
+          </div>
+        </div>
+        <div class="c">
+          <div>
+            <label for="">Unit</label><br>
+            <input type="text" name="unit" value="{{u}}">
+          </div>
+          <div>
+            <button>Update product</button>
+          </div>
+        </div>
+          
+      </form>
+        </div>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <style>
+      .product{
+        height: 150px;
+        width: 400px;
+        margin-left: 50px;
+        margin-top: 30px;
+        border: 1px solid black;
+        
+        
+      }
+      .total{
+        position: relative;
+        margin-top: -60px;
+        margin-left: 250px;
+      }
+      .pn{
+        position: relative;
+        margin-top: -2px;
+        margin-left: 10px;
+      }
+      .p{
+        position: relative;
+        margin-top: -2px;
+        margin-left: 10px;
+      }
+      .q{
+        position: relative;
+        margin-top: -2px;
+        margin-left: 10px;
+      }
+      .buy{
+        position:fixed;
+        width: 200px;
+        height: 110px;
+        border: 1px solid black;
+        border-radius: 10px;
+        background-color: rgb(240, 234, 234);
+        left: 800px;
+        top: 150px;
+    
+        
+      }
+      .t h1{
+        color: #0a0a0a;
+        margin-left: 10px;
+      }
+      .t a{
+        padding: 13px 20px;
+        box-sizing: 10px;
+        margin-left: 65px;
+        margin-top: -5px;
+        background-color: yellow;
+        border: 1px solid;
+        border-radius: 10px;
+        color: black;
+      }
+      .edit input{
+        position: relative;
+        float: left;
+        margin-left: 20px;
+        margin-top: 0px;
+        width: 50px;
+      }
+      .edit button{
+        margin-left: 20px;
+        border: 1px solid;
+        padding: 5px 8px;
+        color: black;
+      }
+      .del a{
+        position: relative;
+        margin-left: 410px;
+        top: -50px;
+        padding: 10px;
+        border: 1px solid black;
+        border-radius: 25px;
+        color: black;
+        
+      }
+      .del a:hover,.edit button:hover{
+        box-shadow: 0px 0px 2px 2px red;
+      }
+    </style>
+    
+    <title>Cart</title>
+</head>
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">GROCERY</a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li><a href="{{url_for('home',un=un)}}">Home</a></li>
+          </ul>
+          
+          <ul class="nav navbar-nav navbar-right">
+            <li class="active"><a href="#"><span class="glyphicon glyphicon-cart"></span> Cart</a></li>
+            <li><a href="{{url_for('index')}}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            
+          </ul>
+        </div>
+      </nav>
+      <div class="buy">
+        <dic class="t">
+          <h1>Total :{{total}}</h1>
+          <a href="{{url_for('place_a_Order',un=un)}}"> Buy </a>
+        </dic>
+      </div>
+      <div class="cart_section">
+        {%for i in r%}
+        <div class="product">
+          <h2 class="pn">{{i[0]}}</h2>
+          <h1 class="p">{{i[1]}}/{{i[6]}}</h1>
+          <div class="edit">
+            <form action="/add_quantity_to_server/{{i[4]}}/{{i[5]}}/{{un}}" method="post">
+            <input type="number" value="{{i[2]}}" name="quantity">
+            <button>edit</button>
+          </form>
+          </div>
+          <h1 class="total">Rs.{{i[3]}}</h1>
+          <div class="del">
+            <a href="{{url_for('delete_from_cart',pid=i[4],cid=i[5],un=un)}}"><span class="glyphicon glyphicon-trash"></span></a>
+          </div>
+        </div>
+        {%endfor%}
+
+      
+      </div>
+      
+</body>
+</html>

@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>Edit category</title>
+    <style>
+        
+        .cat{
+            height: 50px;
+            width: 600px;
+            border: 1px solid;
+            margin-left: 60px;
+            margin-top: 30px;
+            border-radius: 10px; 
+             
+        }
+        
+        .n{
+            position: relative;
+            top: -10px;
+            margin-left: 20px;
+        }
+        .edit{
+            position: relative;
+            top: -55px;
+            margin-left: 190px;
+        }
+        .delete{
+            position: relative;
+            top: -100px;
+            margin-left: 350px;
+        }
+        .view{
+            position: relative;
+            top: -150px;
+            margin-left: 520px;
+        }
+        .cat h4{
+            margin-top: 25px;
+        }
+        .add_box{
+            margin-top: 30px;
+            height: 260px;
+            width: 300px;
+            border: 1px solid;
+            position: fixed;
+            right: 200px;
+            border-radius: 10px;
+            padding-left: 15px;
+        }
+        .add_box label{
+            font-size: large;
+            margin-top: 15px;
+        }
+        .add_box input{
+            width: 260px;
+            height: 40px;
+        }
+        .add_box button{
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            background-color: blue;
+            color:white;
+            margin-top: 20px;
+            margin-left: 80px;
+        }
+        .add_box button:hover,input:hover{
+            box-shadow: 0px 0px 2px 2px skyblue;
+        }
+        input{
+            font-size: medium;
+            font-weight: 600;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">GROCERY</a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li ><a href="{{url_for('admin_page')}}">Category</a></li>
+            <li ><a href="{{url_for('product_wise')}}">Product</a></li>
+            <li ><a href="{{url_for('summary_section')}}">Summary</a></li>
+          </ul>
+          
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="{{url_for('user_login')}}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            
+            
+          </ul>
+        </div>
+        </nav>
+        
+        <div class="add_box">
+            <form action="/update_edit" method="post">
+            <div>
+                <h1><b>Edit Category</b></h1>
+            </div>
+            <div>
+                <label for="">Category id</label>
+                <input type="text" value="{{id}}" name="id" readonly>
+            </div>
+            <div>
+                <label for="">Category Name</label><br>
+                <input type="text" value="{{name}}" name="name">
+            </div>
+            <div>
+                <button>Apply Changes</button>
+            </div>
+        </form>
+        </div>
+        <div class="center">
+            <div class="cat" style="background-color: rebeccapurple;color: white;">
+                <h3 class="n">Name</h3>
+                <h3 class="edit">Edit</h3>
+                <h3 class="delete">Delete</h3>
+                <h3 class="view">View</h3>
+            </div>
+            {%for i in w%}
+            <div class="cat" >
+                <h4 class="n">{{i.name}}</h4>
+                <h3 class="edit"><a href="{{url_for('edit_page',id=i.id)}}"><span class="glyphicon glyphicon-edit"></span></a></h3>
+                <h3 class="delete"><a href="{{url_for('delete_cat',id=i.id)}}"><span class="glyphicon glyphicon-trash"></span></a></h3>
+                <h3 class="view"><a href="{{url_for('show_items',id=i.id,c=i.name)}}"><span class="glyphicon glyphicon-list-alt"></span></a></h3>
+            </div>
+            {%endfor%}
+
+        </div>
+</body>
+</html>

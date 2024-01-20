@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>home</title>
+    <style>
+      .search{
+        display: flex;
+        justify-content: center;
+        color: white;
+      }
+      .search select{
+        background-color: rgb(55, 55, 54);
+        border: none;
+        height: 7vh;
+        width: 16vh;
+        border-radius: 25px;
+      }
+      .search button{
+        background-color: rgb(232, 13, 13);
+        border: 2px solid black;
+        height: 7vh;
+        width: 10.8vh;
+        border-radius: 25px;
+
+        
+      }
+      .search input{
+        height: 7vh;
+        border-radius: 25px;
+        border: 2px solid black;
+        color: black;
+      }
+      ::placeholder{
+        color: black;
+
+      }
+      
+      .row{
+        height: 200px;
+        width: 200px;
+        background-color: rgb(229, 234, 233);
+        position: relative;
+        margin-top: 20px;
+        margin-left: 50px;
+        float: left;
+        border: 1px solid ;
+      }
+      .row h4{
+        margin-top:70px;
+      }
+      .row h3{
+        margin-top: -10px;
+      }
+      .row div input{
+        width: 40px;
+        margin-top: -5px;
+      }
+      .row label{
+        margin-left: 4px;
+      }
+      .row button{
+        background-color: yellow;
+        margin-left: 4px;
+      }
+      .row h5{
+        margin-top: 4px;
+        color: red;
+        font-weight: 800;
+      }
+      .row:hover{
+        box-shadow: 0px 0px 5px 2px black;
+      }
+      
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">GROCERY</a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+          </ul>
+          
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="{{url_for('cart_section',un=un)}}"><span class="glyphicon glyphicon-cart"></span> Cart</a></li>
+            <li><a href="{{url_for('user_login')}}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            
+          </ul>
+        </div>
+      </nav>
+      <div class="search" >
+        <form action="/search/{{un}}" method="post" >
+          <select name="dropdown" id="dropdown">
+              <option value="category">Category</option> 
+              <option value="product">Product</option>
+              <option value="manufacture_date">Manufacture</option>
+              <option value="expiry_date">Expiry</option>
+              <option value="rate">Price</option>  
+          </select>
+          
+          <input type="{{type}}" placeholder="Enter the keyword" name="box">
+          <button>Search</button>
+          
+      </form>
+      </div>
+      <center>
+      <h3>{{er}}</h3>
+    </center>
+      <br>
+      <div class="product">
+      {%for i in r%}  
+        <div class="row">
+          <img src="" alt="">
+          <h4>{{i.name}}</h4>
+          <h3>{{i.rate}}/{{i.unit}}</h3>
+          <form action="/adding_to_cart/{{i.id}}/{{i.category_id}}/{{un}}" method="post">
+              <div class="input_unit">
+                <label for="">Qty</label>
+                <input type="number" name="q" value="1" max="{{i.available_stocks}}" min="1">
+              </div>
+              {% if(i.available_stocks<=0)%}
+              <h5>Out of Stock</h5>
+              
+              {%else%}
+              <button>Add to cart</button>
+              {%endif%} 
+              </form>
+        </div>
+        {%endfor%}
+      </div>  
+
+
+
+        
+      
+</body>
+</html>

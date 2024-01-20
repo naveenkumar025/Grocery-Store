@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>Add product</title>
+    <style>
+      body{
+        background-color: #8eb9de;
+      }
+        .box{
+          width: 190vh;
+          height: 75vh;
+          margin: 10vh;
+          padding: 20px 20px;
+          background-color: aliceblue;
+        }
+        .box div{
+          
+          margin: 20px;
+        }
+        .box label{
+          font-size: large;
+        }
+        .box input{
+          width: 250px;
+          height: 40px;
+
+        }
+        
+        .d{
+          width: 280px;
+        }
+        .box .c{
+          float: left;
+        }
+        button{
+          padding: 10px 50px;
+          margin: 50px;
+          border-radius: 10px;
+          border: none;
+          color: aliceblue;
+          background-color: blue;
+        }
+        .box input:hover,button:hover{
+          box-shadow: 0px 0px 2px 2px skyblue;
+        }
+        input{
+            font-size: medium;
+            font-weight: 600;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">GROCERY</a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li ><a href="{{url_for('admin_page')}}">Category</a></li>
+            <li ><a href="{{url_for('product_wise')}}" class="active">Product</a></li>
+            <li ><a href="{{url_for('summary_section')}}">Summary</a></li>
+          </ul>
+          
+          <ul class="nav navbar-nav navbar-right">
+            
+            <li><a href="{{url_for('user_login')}}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        </ul>
+        </div>
+        </nav>
+        <div class="box">
+          <form action="/additemtoserver/{{c}}/{{id}}" method="post">
+          <div><h1><b>Add product</b></h1></div>
+          <div class="c">
+          <div>
+            <label for="" >Category</label><br>
+            <input type="text" name="c_id" value="{{c}}" readonly>
+          </div>
+          <div>
+            <label for="">Product Name</label><br>
+            <input type="text" name="name" required>
+            <h4 style="color: red;">{{nw}}</h4>
+          </div>
+          <div>
+            <label for="">Manufacture Date</label><br>
+            <input type="date" class="d" name="mfd">
+            <h4 style="color: red;">{{mw}}</h4>
+          </div>
+        </div>
+        <div class="c">
+          <div>
+            <label for="">Expiry Date</label><br>
+            <input type="date" class="d" name="ed">
+            <h4 style="color: red;">{{ew}}</h4>
+          </div>
+          <div>
+            <label for="">Quantity</label><br>
+            <input type="number" min="1" name="av">
+            <h4 style="color: red;">{{asw}}</h4>
+          </div>
+          <div>
+            <label for="">Rate</label><br>
+            <input type="number" min="1" name="rate">
+            <h4 style="color: red;">{{rw}}</h4>
+          </div>
+        </div>
+        <div class="c">
+          <div>
+            <label for="">Unit</label><br>
+            <input type="text" name="unit">
+          </div>
+          <div>
+            <button>Add Product</button>
+          </div>
+        </div>
+          
+      </form>
+        </div>
+</body>
+</html>

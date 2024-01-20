@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>Product</title>
+    <style>
+        .category,.product{
+            height: 100px;
+            width: 300px;
+            border: 1px solid;
+            margin-left: 30px;
+            border-radius: 20px;
+            margin-top: 30px;
+            background-color: rgb(139, 224, 47);
+        }
+        .category h1,.product h1{
+            margin-left: 30px;
+            margin-top: 30px;
+            color: #000;
+        }
+        .category a,.product a{
+            text-decoration: none;
+        }
+        .left{
+            position: absolute;
+        }
+        .pro{
+            height: 50px;
+            width: 700px;
+            border: 1px solid;
+            margin-left: 400px;
+            margin-top: 30px;
+            border-radius: 10px; 
+             
+        }
+        
+        .n{
+            position: relative;
+            top: -10px;
+            margin-left: 20px;
+        }
+        .edit{
+            position:absolute;
+            margin-top: 10px;
+            margin-left: 720px;
+        }
+        .delete{
+            position: absolute;
+            margin-top: 10px;
+            margin-left: 760px;
+        }
+        .pro h4{
+            margin-top: 25px;
+        }
+        .pro div{
+            float: left;
+            margin-left: 40px;
+            margin-top: -7px;
+        }
+        .mfd{
+            position: absolute;
+            left: 540px;
+        }
+        .ed{
+            position: absolute;
+            left: 740px;
+        }
+        .rate{
+            position: absolute;
+            left: 900px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">GROCERY</a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li ><a href="{{url_for('admin_page')}}">Category</a></li>
+            <li ><a href="{{url_for('product_wise')}}">Product</a></li>
+            <li ><a href="{{url_for('summary_section')}}">Summary</a></li>
+          </ul>
+          
+          <ul class="nav navbar-nav navbar-right">
+            
+            <li><a href="{{url_for('user_login')}}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        </ul>
+        </div>
+        </nav>
+        <div class="left">
+            <div class="category">
+                <a href="{{url_for('add_items',id=id,c=c)}}"><h1> Add Product </h1></a>
+            </div>
+            <div class="product">
+                <a href="{{url_for('admin_page')}}"><h1>Category wise</h1></a>
+            </div>
+        </div>
+        <div class="center">
+            <div class="pro" style="background-color: rgb(142, 79, 205);color: rgb(252, 249, 249);">
+                <div><h3>Name</h3></div>
+                <div><h3>Manufacture Date</h3></div>
+                <div><h3>Expiry Date</h3></div>
+                <div><h3>Price</h3></div>
+                
+            </div>
+            {%for i in r%}
+            <div class="pro" >
+                <div ><h4>{{i.name}}</h3></div>
+                <div class="mfd"><h4>{{i.manufacture_date}}</h3></div>
+                <div class="ed"><h4>{{i.expiry_date}}</h3></div>
+                <div class="rate"><h4>{{i.rate}}/{{i.unit}}</h3></div>
+                
+                <h3 class="edit"><a href="{{url_for('edit_item',id=i.id,c=c)}}"><span class="glyphicon glyphicon-edit"></span></a></h3>
+                <h3 class="delete"><a href="{{url_for('delete_items',id=i.id,cid=i.category_id,c=c)}}"><span class="glyphicon glyphicon-trash"></span></a></h3>
+            </div>
+            {%endfor%}
+        </div>
+</body>
+</html>
